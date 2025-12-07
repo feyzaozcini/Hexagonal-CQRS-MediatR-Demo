@@ -1,4 +1,5 @@
-﻿using HexagonalSample.Application.DtoClasses.Categories.Commands;
+﻿using AutoMapper;
+using HexagonalSample.Application.DtoClasses.Categories.Commands;
 using HexagonalSample.Application.Exceptions;
 using HexagonalSample.Application.PrimaryPorts.CategoryPorts;
 using HexagonalSample.Domain.SecondaryPorts;
@@ -13,10 +14,12 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
     public class UpdateCategoryUseCase : IUpdateCategoryUseCase
     {
         private readonly ICategoryRepository _repository;
+        private readonly IMapper _mapper;
 
-        public UpdateCategoryUseCase(ICategoryRepository repository)
+        public UpdateCategoryUseCase(ICategoryRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<CategoryCommandResult> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
@@ -30,8 +33,7 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
             if (category == null)
                 throw new NotFoundException("Category not found");
 
-            category.CategoryName = command.CategoryName;
-            category.Description = command.Description;
+            _mapper.Map(command, category);
             category.UpdatedDate = DateTime.Now;
             category.Status = Domain.Enums.DataStatus.Updated;
 

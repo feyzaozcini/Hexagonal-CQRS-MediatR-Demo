@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.CategoryPorts
 {
-    public interface IGetAllCategoriesUseCase
-    : IRequestHandler<GetCategoryQuery, List<GetCategoryQueryResult>>
+    public interface IGetAllCategoriesUseCase: IRequestHandler<GetCategoryQuery, List<GetCategoryQueryResult>>
     {
         Task<List<GetCategoryQueryResult>> ExecuteAsync(GetCategoryQuery query);
     }

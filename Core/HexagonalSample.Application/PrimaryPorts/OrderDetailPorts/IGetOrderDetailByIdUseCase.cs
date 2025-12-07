@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.OrderDetailPorts
 {
-    public interface IGetOrderDetailByIdUseCase
-    : IRequestHandler<GetOrderDetailByIdQuery, GetOrderDetailQueryResult>
+    public interface IGetOrderDetailByIdUseCase: IRequestHandler<GetOrderDetailByIdQuery, GetOrderDetailQueryResult>
     {
         Task<GetOrderDetailQueryResult> ExecuteAsync(GetOrderDetailByIdQuery query);
     }

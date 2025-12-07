@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.AppUserProfilePorts
 {
-    public interface IGetAppUserProfilesUseCase
-    : IRequestHandler<GetAppUserProfilesQuery, List<GetAppUserProfileQueryResult>>
+    public interface IGetAppUserProfilesUseCase: IRequestHandler<GetAppUserProfilesQuery, List<GetAppUserProfileQueryResult>>
     {
         Task<List<GetAppUserProfileQueryResult>> ExecuteAsync(GetAppUserProfilesQuery query);
     }

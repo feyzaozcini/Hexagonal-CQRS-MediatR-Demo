@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.CategoryPorts
 {
-    public interface ICreateCategoryUseCase
-    : IRequestHandler<CreateCategoryCommand, CategoryCommandResult>
+    public interface ICreateCategoryUseCase: IRequestHandler<CreateCategoryCommand, CategoryCommandResult>
     {
         Task<CategoryCommandResult> ExecuteAsync(CreateCategoryCommand command);
     }

@@ -1,4 +1,5 @@
-﻿using HexagonalSample.Application.DtoClasses.Categories.Commands;
+﻿using AutoMapper;
+using HexagonalSample.Application.DtoClasses.Categories.Commands;
 using HexagonalSample.Application.PrimaryPorts.CategoryPorts;
 using HexagonalSample.Domain.Entities;
 using HexagonalSample.Domain.SecondaryPorts;
@@ -13,10 +14,12 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
     public class CreateCategoryUseCase : ICreateCategoryUseCase
     {
         private readonly ICategoryRepository _repository;
+        private readonly IMapper _mapper;
 
-        public CreateCategoryUseCase(ICategoryRepository repository)
+        public CreateCategoryUseCase(ICategoryRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<CategoryCommandResult> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
@@ -26,13 +29,9 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
 
         public async Task<CategoryCommandResult> ExecuteAsync(CreateCategoryCommand command)
         {
-            var category = new Category
-            {
-                CategoryName = command.CategoryName,
-                Description = command.Description,
-                CreatedDate = DateTime.Now,
-                Status = Domain.Enums.DataStatus.Inserted
-            };
+            var category = _mapper.Map<Category>(command);
+            category.CreatedDate = DateTime.Now;
+            category.Status = Domain.Enums.DataStatus.Inserted;
 
             await _repository.AddAsync(category);
 
@@ -41,6 +40,7 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
                 Id = category.Id,
                 Message = "Category created successfully"
             };
+
         }
     }
 

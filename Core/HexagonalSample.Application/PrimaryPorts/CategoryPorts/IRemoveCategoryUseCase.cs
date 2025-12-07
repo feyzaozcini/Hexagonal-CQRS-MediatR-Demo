@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.CategoryPorts
 {
-    public interface IRemoveCategoryUseCase
-    : IRequestHandler<RemoveCategoryCommand, CategoryCommandResult>
+    public interface IRemoveCategoryUseCase: IRequestHandler<RemoveCategoryCommand, CategoryCommandResult>
     {
         Task<CategoryCommandResult> ExecuteAsync(RemoveCategoryCommand command);
     }

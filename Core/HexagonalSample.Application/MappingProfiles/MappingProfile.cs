@@ -3,6 +3,8 @@ using HexagonalSample.Application.DtoClasses.AppUserProfiles.Commands;
 using HexagonalSample.Application.DtoClasses.AppUserProfiles.Queries;
 using HexagonalSample.Application.DtoClasses.AppUsers.Commands;
 using HexagonalSample.Application.DtoClasses.AppUsers.Queries;
+using HexagonalSample.Application.DtoClasses.Categories.Commands;
+using HexagonalSample.Application.DtoClasses.Categories.Queries;
 using HexagonalSample.Application.DtoClasses.OrderDetails.Commands;
 using HexagonalSample.Application.DtoClasses.OrderDetails.Queires;
 using HexagonalSample.Application.DtoClasses.Orders.Commands;
@@ -41,6 +43,10 @@ namespace HexagonalSample.Application.MappingProfiles
             CreateMap<CreateProductCommand, Product>();
             CreateMap<UpdateProductCommand, Product>();
             CreateMap<Product, GetProductQueryResult>();
+
+            CreateMap<CreateCategoryCommand, Category>();
+            CreateMap<UpdateCategoryCommand, Category>();
+            CreateMap<Category, GetCategoryQueryResult>();
         }
     }
 }

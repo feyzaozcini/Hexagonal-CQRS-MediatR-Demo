@@ -24,6 +24,7 @@ namespace HexagonalSample.Application.UseCases.OrderUseCases
             _mapper = mapper;
         }
 
+
         public async Task<OrderCommandResult> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             return await ExecuteAsync(request);

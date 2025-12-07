@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.AuppUserPorts
 {
-    public interface IRemoveAppUserUseCase
-    : IRequestHandler<RemoveAppUserCommand, AppUserCommandResult>
+    public interface IRemoveAppUserUseCase: IRequestHandler<RemoveAppUserCommand, AppUserCommandResult>
     {
         Task<AppUserCommandResult> ExecuteAsync(RemoveAppUserCommand command);
     }

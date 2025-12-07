@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.AuppUserPorts
 {
-    public interface IUpdateAppUserUseCase
-    : IRequestHandler<UpdateAppUserCommand, AppUserCommandResult>
+    public interface IUpdateAppUserUseCase: IRequestHandler<UpdateAppUserCommand, AppUserCommandResult>
     {
         Task<AppUserCommandResult> ExecuteAsync(UpdateAppUserCommand command);
     }

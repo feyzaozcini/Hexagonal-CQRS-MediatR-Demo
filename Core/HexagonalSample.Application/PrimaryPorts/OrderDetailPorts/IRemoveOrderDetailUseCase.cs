@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.OrderDetailPorts
 {
-    public interface IRemoveOrderDetailUseCase
-    : IRequestHandler<RemoveOrderDetailCommand, OrderDetailCommandResult>
+    public interface IRemoveOrderDetailUseCase: IRequestHandler<RemoveOrderDetailCommand, OrderDetailCommandResult>
     {
         Task<OrderDetailCommandResult> ExecuteAsync(RemoveOrderDetailCommand command);
     }

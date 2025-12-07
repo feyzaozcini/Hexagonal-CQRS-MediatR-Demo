@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace HexagonalSample.Application.PrimaryPorts.ProductPorts
 {
-    public interface IGetProductsUseCase
-    : IRequestHandler<GetProductsQuery, List<GetProductQueryResult>>
+    public interface IGetProductsUseCase: IRequestHandler<GetProductsQuery, List<GetProductQueryResult>>
     {
         Task<List<GetProductQueryResult>> ExecuteAsync(GetProductsQuery query);
     }

@@ -1,4 +1,5 @@
-﻿using HexagonalSample.Application.DtoClasses.Categories.Queries;
+﻿using AutoMapper;
+using HexagonalSample.Application.DtoClasses.Categories.Queries;
 using HexagonalSample.Application.PrimaryPorts.CategoryPorts;
 using HexagonalSample.Domain.SecondaryPorts;
 using System;
@@ -12,10 +13,12 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
     public class GetAllCategoriesUseCase : IGetAllCategoriesUseCase
     {
         private readonly ICategoryRepository _repository;
+        private readonly IMapper _mapper;
 
-        public GetAllCategoriesUseCase(ICategoryRepository repository)
+        public GetAllCategoriesUseCase(ICategoryRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<List<GetCategoryQueryResult>> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
@@ -26,14 +29,9 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
         public async Task<List<GetCategoryQueryResult>> ExecuteAsync(GetCategoryQuery query)
         {
             var categories = await _repository.GetAllAsync();
-
-            return categories.Select(c => new GetCategoryQueryResult
-            {
-                Id = c.Id,
-                CategoryName = c.CategoryName,
-                Description = c.Description
-            }).ToList();
+            return _mapper.Map<List<GetCategoryQueryResult>>(categories);
         }
     }
+}
 
 }

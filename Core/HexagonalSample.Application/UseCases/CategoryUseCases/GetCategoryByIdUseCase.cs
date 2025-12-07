@@ -1,4 +1,6 @@
-﻿using HexagonalSample.Application.DtoClasses.Categories.Queries;
+﻿using AutoMapper;
+using HexagonalSample.Application.DtoClasses.Categories.Queries;
+using HexagonalSample.Application.Exceptions;
 using HexagonalSample.Application.PrimaryPorts.CategoryPorts;
 using HexagonalSample.Domain.SecondaryPorts;
 using System;
@@ -12,10 +14,12 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
     public class GetCategoryByIdUseCase : IGetCategoryByIdUseCase
     {
         private readonly ICategoryRepository _repository;
+        private readonly IMapper _mapper;
 
-        public GetCategoryByIdUseCase(ICategoryRepository repository)
+        public GetCategoryByIdUseCase(ICategoryRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<GetCategoryQueryResult> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
@@ -25,16 +29,11 @@ namespace HexagonalSample.Application.UseCases.CategoryUseCases
 
         public async Task<GetCategoryQueryResult> ExecuteAsync(GetCategoryByIdQuery query)
         {
-            var c = await _repository.GetByIdAsync(query.Id);
-            if (c == null)
-                throw new Exception("Category not found");
+            var category = await _repository.GetByIdAsync(query.Id);
+            if (category == null)
+                throw new NotFoundException("Category not found");
 
-            return new GetCategoryQueryResult
-            {
-                Id = c.Id,
-                CategoryName = c.CategoryName,
-                Description = c.Description
-            };
+            return _mapper.Map<GetCategoryQueryResult>(category);
         }
     }
 
