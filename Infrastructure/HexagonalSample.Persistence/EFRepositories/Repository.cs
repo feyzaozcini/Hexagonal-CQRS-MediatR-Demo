@@ -35,7 +35,7 @@ namespace HexagonalSample.Persistence.EFRepositories
 
         public async Task RemoveAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
         }
 
